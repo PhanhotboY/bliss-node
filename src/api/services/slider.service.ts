@@ -29,15 +29,17 @@ const createSlider = async (slider: ISliderAttrs) => {
 };
 
 const updateSlider = async (type: string, slider: any) => {
-  const updatedSlider = await SliderModel.findOneAndUpdate(
+  let updatedSlider = await SliderModel.findOneAndUpdate(
     { sld_type: type },
     {
       ...formatAttributeName(removeNestedNullish(slider), SLIDER.PREFIX),
     },
     { new: true }
   );
-  if (!updatedSlider) await createSlider({ ...slider, type });
-  return getReturnData(updatedSlider);
+  // If slider not found, create new slider
+  // @ts-ignore
+  if (!updatedSlider) updatedSlider = await createSlider({ ...slider, type });
+  return getReturnData(updatedSlider!);
 };
 
 const deleteSlider = async (sliderId: string) => {
