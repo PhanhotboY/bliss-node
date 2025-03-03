@@ -1,12 +1,12 @@
 import { app } from './src/app';
 import { mongodbInstance } from './src/db/init.mongodb';
 
-const server = app.listen(process.env.DEV_APP_PORT, async () => {
+const server = app.listen(process.env.NODE_PORT, async () => {
   await mongodbInstance.connect();
   console.log(
     process.env.NODE_ENV,
     'hello world from port',
-    process.env.DEV_APP_PORT
+    process.env.NODE_PORT
   );
 });
 

@@ -1,5 +1,5 @@
 import os from 'os';
-import mongoose from 'mongoose';
+import mongoose, { connection } from 'mongoose';
 
 import { mongodbConfig } from '../configs/config.mongodb';
 import { InternalServerError } from '../api/core/errors';
@@ -23,8 +23,12 @@ class MongoDB {
 
     console.log('Retrying to connect to MongoDB...', this.retryCount);
     this.retryCount++;
+    const connectionStr = {
+      production: `mongodb+srv://${dbUser}:${dbPwd}@${dbHost}?retryWrites=true&w=majority&appName=Cluster0`,
+      development: `mongodb://${dbUser}:${dbPwd}@${dbHost}:${dbPort}`,
+    }[process.env.NODE_ENV as 'development' | 'production'];
     await mongoose
-      .connect(`mongodb://${dbUser}:${dbPwd}@${dbHost}:${dbPort}`, {
+      .connect(connectionStr, {
         connectTimeoutMS: 1000,
         serverSelectionTimeoutMS: 2000,
         dbName,

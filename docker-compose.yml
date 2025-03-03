@@ -1,26 +1,26 @@
 version: '3.8'
 services:
-  blissmdb:
+  nhaymdb:
     image: mongo
     environment:
-      MONGO_INITDB_ROOT_USERNAME: bliss
-      MONGO_INITDB_ROOT_PASSWORD: bliss
+      MONGO_INITDB_ROOT_USERNAME: nhay
+      MONGO_INITDB_ROOT_PASSWORD: nhay
     ports:
       - 27017:27017
     networks:
-      - bliss_network
+      - nhay_network
 
   # server:
   #   build: .
   #   ports:
   #     - 8080:8080
   #   depends_on:
-  #     - blissmdb
+  #     - nhaymdb
   #   networks:
-  #     - blissmdb_network
+  #     - nhaymdb_network
   #   environment:
-  #     DEV_DB_HOST: blissmdb
+  #     DEV_DB_HOST: nhaymdb
 
 networks:
-  bliss_network:
+  nhay_network:
     driver: bridge
