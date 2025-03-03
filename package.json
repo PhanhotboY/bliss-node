@@ -7,7 +7,8 @@
     "start": "pm2 start ecosystem.config.js",
     "dev": "nodemon -L --inspect server.ts",
     "start:logger": "nodemon src/api/loggers/discord.log.ts",
-    "generate:api-key": "ts-node src/scripts/genApiKey.ts",
+    "gen:apikey": "ts-node src/scripts/genApiKey.ts",
+    "gen:metadata": "ts-node src/scripts/genMetadata.ts",
     "build": "tsc && tsc-alias"
   },
   "keywords": [],
