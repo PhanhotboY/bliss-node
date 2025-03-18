@@ -1,7 +1,7 @@
 import { HydratedDocument, Model, ObjectId } from 'mongoose';
-// import { Post } from '../constants';
+// import { Page } from '../constants';
 
-interface IRawPost {
+interface IRawPage {
   _id: string;
   pst_title: string;
   pst_content: string;
@@ -9,28 +9,28 @@ interface IRawPost {
   pst_slug: string;
   pst_views: number;
   pst_excerpt: string;
-  pst_category: ObjectId;
-  pst_template: ObjectId;
+  pst_category: string;
+  pst_template: string;
   pst_isPublished: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export type IPost = HydratedDocument<IRawPost>;
+export type IPage = HydratedDocument<IRawPage>;
 
-export interface IPostAttrs {
+export interface IPageAttrs {
   title: string;
   content: string;
   thumbnail: string;
   slug: string;
   excerpt: string;
-  category: ObjectId;
-  template: ObjectId;
+  category: string;
+  template: string;
   isPublished?: boolean;
   views?: number;
 }
 
-export interface IPostResponseData {
+export interface IPageResponseData {
   id: string;
   category: string;
   template: string;
@@ -43,6 +43,6 @@ export interface IPostResponseData {
   isPublished: boolean;
 }
 
-export interface IPostModel extends Model<IPost> {
-  build(attrs: IPostAttrs): Promise<IPost>;
+export interface IPageModel extends Model<IPage> {
+  build(attrs: IPageAttrs): Promise<IPage>;
 }

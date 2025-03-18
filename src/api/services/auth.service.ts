@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
+import { randomBytes } from 'crypto';
 
-import { USER } from '../constants';
+import { TEMPLATE, USER } from '../constants';
 import { getReturnData } from '../utils';
 import { createTokenPair, generateKeyPair } from '../auth/authUtils';
 import { IUserAttrs, IUserJWTPayload } from '../interfaces/user.interface';
@@ -15,13 +16,9 @@ import {
   createKeyToken,
   updateRefreshToken,
 } from './keyToken.service';
-import {
-  createUser,
-  findUserByEmail,
-  findUserById,
-} from '../models/repositories/user.repo';
+import { createUser, findUserById } from '../models/repositories/user.repo';
 import { UserModel } from '../models/user.model';
-import { sendVerificationEmail } from './email.service';
+import { sendVerificationEmail, sendTempPassEmail } from './email.service';
 import { deleteOTPByEmail, getOTPByToken } from './otp.service';
 
 export class AuthService {
@@ -106,7 +103,8 @@ export class AuthService {
     }
 
     const salt = bcrypt.genSaltSync(10);
-    const hashPassword = await bcrypt.hash(email, salt);
+    const tempPass = randomBytes(8).toString('hex');
+    const hashPassword = await bcrypt.hash(tempPass, salt);
 
     const newUser = await createUser({
       email,
@@ -123,24 +121,10 @@ export class AuthService {
       throw new InternalServerError('Fail to create new user!');
     }
 
-    const { privateKey, publicKey } = generateKeyPair();
-
-    const tokens = createTokenPair({
-      payload: { userId: newUser.id, email },
-      privateKey,
-      publicKey,
-    });
-
-    await createKeyToken({
-      user: newUser.id,
-      privateKey,
-      publicKey,
-      refreshToken: tokens.refreshToken,
-    });
+    await sendTempPassEmail(email, { username: email, password: tempPass });
 
     return {
-      user: getReturnData(newUser, { without: ['usr_password', 'usr_status'] }),
-      tokens,
+      ok: true,
     };
   }
 

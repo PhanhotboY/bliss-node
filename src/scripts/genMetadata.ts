@@ -1,19 +1,27 @@
 require('dotenv').config();
-import { PostTemplateModel } from '@models/postTemplate.model';
 import { mongodbInstance } from '../db/init.mongodb';
-import { POST } from 'src/api/constants';
-import { PostCategoryModel } from '@models/postCategory.model';
+import { PAGE, TEMPLATE } from 'src/api/constants';
+import { TemplateModel } from '@models/template.model';
+import { emailVerificationEmailTemplate } from '@utils/email.template';
+import { passwordEmailTemplate } from '@utils/password.template';
+
+const htmlTemplate = {
+  [TEMPLATE.NAME.PASSWORD]: passwordEmailTemplate,
+  [TEMPLATE.NAME.VERIFY_EMAIL]: emailVerificationEmailTemplate,
+};
 
 async function main() {
   await mongodbInstance.connect();
 
-  for (const temp of Object.values(POST.TEMPLATE.OPTIONS)) {
-    await PostTemplateModel.build(temp);
+  for (const name of Object.values(TEMPLATE.NAME)) {
+    await TemplateModel.build({
+      name,
+      html: htmlTemplate[name](),
+      status: 'active',
+    });
   }
-  for (const cat of Object.values(POST.CATEGORY.OPTIONS)) {
-    // @ts-ignore
-    await PostCategoryModel.build(cat);
-  }
+
+  console.log('Metadata generated successfully!');
 
   await mongodbInstance.disconnect();
 }

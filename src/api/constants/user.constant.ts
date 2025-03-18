@@ -1,6 +1,6 @@
 export const USER = {
-  COLLECTION_NAME: 'users',
   DOCUMENT_NAME: 'User',
+  COLLECTION_NAME: 'users',
   PREFIX: 'usr_',
   STATUS: {
     ACTIVE: 'active',

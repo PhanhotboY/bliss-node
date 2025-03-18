@@ -9,15 +9,15 @@ import { APP } from '../constants';
 
 const updateAppSettings = async (settings: IAppAttrs) => {
   let app = await AppModel.findOne({});
+
   if (!app) {
     const app = await AppModel.build(settings);
     return getReturnData(app);
   }
-  await app.updateOne(
-    formatAttributeName(removeNestedNullish(settings), APP.PREFIX)
+  app = await app.updateOne(
+    formatAttributeName(removeNestedNullish(settings), APP.PREFIX),
+    { new: true },
   );
-
-  app = await AppModel.findOne({});
 
   return getReturnData(app!);
 };
@@ -26,29 +26,19 @@ const getAppSettings = async () => {
   const app = await AppModel.findOne({});
   if (!app) {
     const app = await AppModel.build({
-      title: 'string',
-      description: 'string',
-      logo: 'string',
-      email: 'string',
-      msisdn: 'string',
-      address: {
-        province: 'string',
-        district: 'string',
-        // ward: 'string',
-        street: 'string',
-      },
+      title: '',
+      description: '',
+      logo: '',
+      favicon: '',
       social: {
-        facebook: 'string',
-        youtube: 'string',
-        tiktok: 'string',
-        zalo: 'string',
+        facebook: '',
+        zalo: '',
+        youtube: '',
+        tiktok: '',
       },
-      google: {
-        analytics: 'string',
-        reCaptcha: 'string',
-        map: 'string',
-      },
-      taxCode: 'string',
+      taxCode: '',
+      headScripts: '',
+      bodyScripts: '',
     });
     return getReturnData(app);
   }

@@ -1,4 +1,4 @@
-export const emailVerificationEmailTemplate = () => {
+export const passwordEmailTemplate = () => {
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html
   dir="ltr"
@@ -37,7 +37,10 @@ export const emailVerificationEmailTemplate = () => {
       </xml>
     <![endif]-->
     <!--[if !mso]><!-- -->
-    <link href="https://fonts.googleapis.com/css2?family=Imprima&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Imprima&display=swap"
+      rel="stylesheet"
+    />
     <!--<![endif]-->
     <style type="text/css">
       #outlook a {
@@ -273,7 +276,12 @@ export const emailVerificationEmailTemplate = () => {
       margin: 0;
     "
   >
-    <div dir="ltr" class="es-wrapper-color" lang="en" style="background-color: #ffffff; padding-top: 3rem">
+    <div
+      dir="ltr"
+      class="es-wrapper-color"
+      lang="en"
+      style="background-color: #ffffff; padding-top: 3rem"
+    >
       <!--[if gte mso 9]>
         <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
           <v:fill type="tile" color="#ffffff"></v:fill>
@@ -338,7 +346,13 @@ export const emailVerificationEmailTemplate = () => {
                     <tr>
                       <td
                         align="left"
-                        style="padding: 0; margin: 0; padding-top: 40px; padding-left: 40px; padding-right: 40px"
+                        style="
+                          padding: 0;
+                          margin: 0;
+                          padding-top: 40px;
+                          padding-left: 40px;
+                          padding-right: 40px;
+                        "
                       >
                         <table
                           cellpadding="0"
@@ -353,7 +367,11 @@ export const emailVerificationEmailTemplate = () => {
                           "
                         >
                           <tr>
-                            <td align="center" valign="top" style="padding: 0; margin: 0; width: 520px">
+                            <td
+                              align="center"
+                              valign="top"
+                              style="padding: 0; margin: 0; width: 520px"
+                            >
                               <table
                                 cellpadding="0"
                                 cellspacing="0"
@@ -367,7 +385,15 @@ export const emailVerificationEmailTemplate = () => {
                                 "
                               >
                                 <tr>
-                                  <td align="left" class="es-m-txt-c" style="padding: 0; margin: 0; font-size: 0px">
+                                  <td
+                                    align="left"
+                                    class="es-m-txt-c"
+                                    style="
+                                      padding: 0;
+                                      margin: 0;
+                                      font-size: 0px;
+                                    "
+                                  >
                                     <a
                                       target="_blank"
                                       href="https://viewstripo.email"
@@ -405,7 +431,13 @@ export const emailVerificationEmailTemplate = () => {
                     <tr>
                       <td
                         align="left"
-                        style="padding: 0; margin: 0; padding-top: 20px; padding-left: 40px; padding-right: 40px"
+                        style="
+                          padding: 0;
+                          margin: 0;
+                          padding-top: 20px;
+                          padding-left: 40px;
+                          padding-right: 40px;
+                        "
                       >
                         <table
                           cellpadding="0"
@@ -420,7 +452,11 @@ export const emailVerificationEmailTemplate = () => {
                           "
                         >
                           <tr>
-                            <td align="center" valign="top" style="padding: 0; margin: 0; width: 520px">
+                            <td
+                              align="center"
+                              valign="top"
+                              style="padding: 0; margin: 0; width: 520px"
+                            >
                               <table
                                 cellpadding="0"
                                 cellspacing="0"
@@ -437,7 +473,10 @@ export const emailVerificationEmailTemplate = () => {
                                 role="presentation"
                               >
                                 <tr>
-                                  <td align="left" style="padding: 20px; margin: 0">
+                                  <td
+                                    align="left"
+                                    style="padding: 20px; margin: 0"
+                                  >
                                     <h3
                                       style="
                                         margin: 0;
@@ -478,11 +517,12 @@ export const emailVerificationEmailTemplate = () => {
                                         font-size: 18px;
                                       "
                                     >
-                                      Bạn nhận được tin nhắn này vì bạn vừa tạo một tài khoản mới. Hãy bỏ qua nếu bạn
-                                      không phải là người thực hiện hành động này.
+                                      Đây là mật khẩu tạm thời cho tài khoản của
+                                      bạn. Hãy đổi sau lần đăng nhập đầu tiên.
                                       <br /><br />
-                                      Nếu bạn là người đăng ký tài khoản, vui lòng nhấn vào nút bên dưới để xác nhận địa
-                                      chỉ email của bạn.
+                                      <div>Username: {{username}}</div>
+                                      <br />
+                                      <div>Mật khẩu: {{password}}</div>
                                     </p>
                                   </td>
                                 </tr>
@@ -538,6 +578,7 @@ export const emailVerificationEmailTemplate = () => {
                           padding-bottom: 40px;
                           padding-left: 40px;
                           padding-right: 40px;
+                          
                         "
                       >
                         <table
@@ -553,7 +594,11 @@ export const emailVerificationEmailTemplate = () => {
                           "
                         >
                           <tr>
-                            <td align="center" valign="top" style="padding: 0; margin: 0; width: 520px">
+                            <td
+                              align="center"
+                              valign="top"
+                              style="padding: 0; margin: 0; width: 520px"
+                            >
                               <table
                                 cellpadding="0"
                                 cellspacing="0"
@@ -567,7 +612,10 @@ export const emailVerificationEmailTemplate = () => {
                                 "
                               >
                                 <tr>
-                                  <td align="center" style="padding: 0; margin: 0">
+                                  <td
+                                    align="center"
+                                    style="padding: 0; margin: 0"
+                                  >
                                     <span
                                       class="es-button-border"
                                       style="
@@ -580,7 +628,7 @@ export const emailVerificationEmailTemplate = () => {
                                         width: auto;
                                       "
                                       ><a
-                                        href="{{verifyUrl}}"
+                                        href="{{clientUrl}}"
                                         class="es-button msohide"
                                         target="_blank"
                                         style="
@@ -595,7 +643,8 @@ export const emailVerificationEmailTemplate = () => {
                                           display: block;
                                           background: #7630f3;
                                           border-radius: 30px;
-                                          font-family: Imprima, Arial, sans-serif;
+                                          font-family: Imprima, Arial,
+                                            sans-serif;
                                           font-weight: bold;
                                           font-style: normal;
                                           line-height: 26px;
@@ -607,7 +656,7 @@ export const emailVerificationEmailTemplate = () => {
                                           padding-left: 5px;
                                           padding-right: 5px;
                                         "
-                                        >Xác nhận địa chỉ email</a
+                                        >Đi đến trang web</a
                                       ></span
                                     >
                                   </td>
@@ -619,7 +668,16 @@ export const emailVerificationEmailTemplate = () => {
                       </td>
                     </tr>
                     <tr>
-                      <td align="left" style="padding: 0; margin: 0; padding-left: 40px; padding-right: 40px">
+                      <td
+                        align="left"
+                        style="
+                          padding: 0;
+                          margin: 0;
+                          padding-right: 40px;
+                          padding-left: 40px;
+                          padding-bottom: 16px;
+                        "
+                      >
                         <table
                           cellpadding="0"
                           cellspacing="0"
@@ -633,7 +691,11 @@ export const emailVerificationEmailTemplate = () => {
                           "
                         >
                           <tr>
-                            <td align="center" valign="top" style="padding: 0; margin: 0; width: 520px">
+                            <td
+                              align="center"
+                              valign="top"
+                              style="padding: 0; margin: 0; width: 520px"
+                            >
                               <table
                                 cellpadding="0"
                                 cellspacing="0"
@@ -647,7 +709,10 @@ export const emailVerificationEmailTemplate = () => {
                                 "
                               >
                                 <tr>
-                                  <td align="left" style="padding: 0; margin: 0">
+                                  <td
+                                    align="left"
+                                    style="padding: 0; margin: 0"
+                                  >
                                     <p
                                       style="
                                         margin: 0;
@@ -660,45 +725,12 @@ export const emailVerificationEmailTemplate = () => {
                                         font-size: 18px;
                                       "
                                     >
-                                      Trân trọng,<br />Phan
+                                      Trân trọng,
+                                      <br />
+                                      Phan
                                     </p>
                                   </td>
                                 </tr>
-                                <tr>
-                                  <td
-                                    align="center"
-                                    style="padding: 0; margin: 0; padding-bottom: 20px; padding-top: 40px; font-size: 0"
-                                  >
-                                    <table
-                                      border="0"
-                                      width="100%"
-                                      height="100%"
-                                      cellpadding="0"
-                                      cellspacing="0"
-                                      role="presentation"
-                                      style="
-                                        mso-table-lspace: 0pt;
-                                        mso-table-rspace: 0pt;
-                                        border-collapse: collapse;
-                                        border-spacing: 0px;
-                                      "
-                                    >
-                                      <tr>
-                                        <td
-                                          style="
-                                            padding: 0;
-                                            margin: 0;
-                                            border-bottom: 1px solid #666666;
-                                            background: unset;
-                                            height: 1px;
-                                            width: 100%;
-                                            margin: 0px;
-                                          "
-                                        ></td>
-                                      </tr>
-                                    </table>
-                                  </td>
-                                </tr>
                               </table>
                             </td>
                           </tr>
@@ -709,206 +741,7 @@ export const emailVerificationEmailTemplate = () => {
                 </td>
               </tr>
             </table>
-            <table
-              cellpadding="0"
-              cellspacing="0"
-              class="es-content"
-              align="center"
-              role="none"
-              style="
-                mso-table-lspace: 0pt;
-                mso-table-rspace: 0pt;
-                border-collapse: collapse;
-                border-spacing: 0px;
-                table-layout: fixed !important;
-                width: 100%;
-              "
-            >
-              <tr>
-                <td align="center" style="padding: 0; margin: 0">
-                  <table
-                    bgcolor="#efefef"
-                    class="es-content-body"
-                    align="center"
-                    cellpadding="0"
-                    cellspacing="0"
-                    style="
-                      mso-table-lspace: 0pt;
-                      mso-table-rspace: 0pt;
-                      border-collapse: collapse;
-                      border-spacing: 0px;
-                      background-color: #efefef;
-                      border-radius: 0 0 20px 20px;
-                      width: 600px;
-                    "
-                    role="none"
-                  >
-                    <tr>
-                      <td
-                        class="esdev-adapt-off"
-                        align="left"
-                        style="
-                          margin: 0;
-                          padding-top: 20px;
-                          padding-bottom: 20px;
-                          padding-left: 40px;
-                          padding-right: 40px;
-                        "
-                      >
-                        <table
-                          cellpadding="0"
-                          cellspacing="0"
-                          class="esdev-mso-table"
-                          role="none"
-                          style="
-                            mso-table-lspace: 0pt;
-                            mso-table-rspace: 0pt;
-                            border-collapse: collapse;
-                            border-spacing: 0px;
-                            width: 520px;
-                          "
-                        >
-                          <tr>
-                            <td class="esdev-mso-td" valign="top" style="padding: 0; margin: 0">
-                              <table
-                                cellpadding="0"
-                                cellspacing="0"
-                                align="left"
-                                class="es-left"
-                                role="none"
-                                style="
-                                  mso-table-lspace: 0pt;
-                                  mso-table-rspace: 0pt;
-                                  border-collapse: collapse;
-                                  border-spacing: 0px;
-                                  float: left;
-                                "
-                              >
-                                <tr>
-                                  <td align="center" valign="top" style="padding: 0; margin: 0; width: 47px">
-                                    <table
-                                      cellpadding="0"
-                                      cellspacing="0"
-                                      width="100%"
-                                      role="presentation"
-                                      style="
-                                        mso-table-lspace: 0pt;
-                                        mso-table-rspace: 0pt;
-                                        border-collapse: collapse;
-                                        border-spacing: 0px;
-                                      "
-                                    >
-                                      <tr>
-                                        <td
-                                          align="center"
-                                          class="es-m-txt-l"
-                                          style="padding: 0; margin: 0; font-size: 0px"
-                                        >
-                                          <a
-                                            target="_blank"
-                                            href="https://viewstripo.email"
-                                            style="
-                                              -webkit-text-size-adjust: none;
-                                              -ms-text-size-adjust: none;
-                                              mso-line-height-rule: exactly;
-                                              text-decoration: underline;
-                                              color: #2d3142;
-                                              font-size: 18px;
-                                            "
-                                            ><img
-                                              src="https://foixfha.stripocdn.email/content/guids/CABINET_ee77850a5a9f3068d9355050e69c76d26d58c3ea2927fa145f0d7a894e624758/images/group_4076325.png"
-                                              alt="Demo"
-                                              style="
-                                                display: block;
-                                                border: 0;
-                                                outline: none;
-                                                text-decoration: none;
-                                                -ms-interpolation-mode: bicubic;
-                                              "
-                                              width="47"
-                                              title="Demo"
-                                          /></a>
-                                        </td>
-                                      </tr>
-                                    </table>
-                                  </td>
-                                </tr>
-                              </table>
-                            </td>
-                            <td style="padding: 0; margin: 0; width: 20px"></td>
-                            <td class="esdev-mso-td" valign="top" style="padding: 0; margin: 0">
-                              <table
-                                cellpadding="0"
-                                cellspacing="0"
-                                class="es-right"
-                                align="right"
-                                role="none"
-                                style="
-                                  mso-table-lspace: 0pt;
-                                  mso-table-rspace: 0pt;
-                                  border-collapse: collapse;
-                                  border-spacing: 0px;
-                                  float: right;
-                                "
-                              >
-                                <tr>
-                                  <td align="center" valign="top" style="padding: 0; margin: 0; width: 453px">
-                                    <table
-                                      cellpadding="0"
-                                      cellspacing="0"
-                                      width="100%"
-                                      role="presentation"
-                                      style="
-                                        mso-table-lspace: 0pt;
-                                        mso-table-rspace: 0pt;
-                                        border-collapse: collapse;
-                                        border-spacing: 0px;
-                                      "
-                                    >
-                                      <tr>
-                                        <td align="left" style="padding: 0; margin: 0">
-                                          <p
-                                            style="
-                                              margin: 0;
-                                              -webkit-text-size-adjust: none;
-                                              -ms-text-size-adjust: none;
-                                              mso-line-height-rule: exactly;
-                                              font-family: Imprima, Arial, sans-serif;
-                                              line-height: 24px;
-                                              color: #2d3142;
-                                              font-size: 16px;
-                                            "
-                                          >
-                                            This link expire in 24 hours. If you have questions,
-                                            <a
-                                              target="_blank"
-                                              style="
-                                                -webkit-text-size-adjust: none;
-                                                -ms-text-size-adjust: none;
-                                                mso-line-height-rule: exactly;
-                                                text-decoration: underline;
-                                                color: #2d3142;
-                                                font-size: 16px;
-                                              "
-                                              href="https://viewstripo.email"
-                                              >we're here to help</a
-                                            >
-                                          </p>
-                                        </td>
-                                      </tr>
-                                    </table>
-                                  </td>
-                                </tr>
-                              </table>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
+
             <table
               cellpadding="0"
               cellspacing="0"
@@ -969,7 +802,10 @@ export const emailVerificationEmailTemplate = () => {
                           "
                         >
                           <tr>
-                            <td align="left" style="padding: 0; margin: 0; width: 560px">
+                            <td
+                              align="left"
+                              style="padding: 0; margin: 0; width: 560px"
+                            >
                               <table
                                 cellpadding="0"
                                 cellspacing="0"
@@ -986,7 +822,13 @@ export const emailVerificationEmailTemplate = () => {
                                   <td
                                     align="center"
                                     class="es-m-txt-c"
-                                    style="padding: 0; margin: 0; padding-top: 10px; padding-bottom: 20px; font-size: 0"
+                                    style="
+                                      padding: 0;
+                                      margin: 0;
+                                      padding-top: 10px;
+                                      padding-bottom: 20px;
+                                      font-size: 0;
+                                    "
                                   >
                                     <table
                                       cellpadding="0"
@@ -1005,7 +847,7 @@ export const emailVerificationEmailTemplate = () => {
                                         <td
                                           align="center"
                                           valign="top"
-                                          style="padding: 0; margin: 0;"
+                                          style="padding: 0; margin: 0"
                                         >
                                           <img
                                             src="https://foixfha.stripocdn.email/content/assets/img/social-icons/logo-black/twitter-logo-black.png"
@@ -1024,7 +866,7 @@ export const emailVerificationEmailTemplate = () => {
                                         <td
                                           align="center"
                                           valign="top"
-                                          style="padding: 0; margin: 0;"
+                                          style="padding: 0; margin: 0"
                                         >
                                           <img
                                             src="https://foixfha.stripocdn.email/content/assets/img/social-icons/logo-black/facebook-logo-black.png"
@@ -1040,7 +882,11 @@ export const emailVerificationEmailTemplate = () => {
                                             "
                                           />
                                         </td>
-                                        <td align="center" valign="top" style="padding: 0; margin: 0">
+                                        <td
+                                          align="center"
+                                          valign="top"
+                                          style="padding: 0; margin: 0"
+                                        >
                                           <img
                                             src="https://foixfha.stripocdn.email/content/assets/img/social-icons/logo-black/linkedin-logo-black.png"
                                             alt="In"
@@ -1060,7 +906,14 @@ export const emailVerificationEmailTemplate = () => {
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td align="center" style="padding: 0; margin: 0; padding-top: 20px">
+                                  <td
+                                    align="center"
+                                    style="
+                                      padding: 0;
+                                      margin: 0;
+                                      padding-top: 20px;
+                                    "
+                                  >
                                     <p
                                       style="
                                         margin: 0;

@@ -1,5 +1,5 @@
 export const CATEGORY = {
   COLLECTION_NAME: 'Categories',
-  DOCUMENT_NAME: 'Category',
+  DOCUMENT_NAME: 'category',
   PREFIX: 'cat_',
 };

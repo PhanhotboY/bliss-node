@@ -15,7 +15,7 @@ const sliderSchema = new Schema<ISlider, ISliderModel>(
   {
     timestamps: true,
     collection: SLIDER.COLLECTION_NAME,
-  }
+  },
 );
 
 sliderSchema.statics.build = (attrs: ISlider) => {
@@ -24,5 +24,5 @@ sliderSchema.statics.build = (attrs: ISlider) => {
 
 export const SliderModel = model<ISlider, ISliderModel>(
   SLIDER.DOCUMENT_NAME,
-  sliderSchema
+  sliderSchema,
 );

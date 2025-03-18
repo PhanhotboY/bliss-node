@@ -1,53 +1,16 @@
-import { NextFunction, Request, Response } from 'express';
-import { AuthService } from '../services/auth.service';
-import { CREATED, OK } from '../core/success.response';
-import { HEADER } from '../constants';
 import { serverConfig } from '@configs/config.server';
+import { Request, Response } from 'express';
+import mongoose from 'mongoose';
 
-export class AuthController {
-  static async signUp(req: Request, res: Response, next: NextFunction) {
-    CREATED({
-      res,
-      message: 'Register Success!',
-      metadata: await AuthService.signUp(req.body),
-      link: {
-        signOut: { href: '/signout', method: 'POST' },
-      },
-    });
-  }
-
-  static async signIn(req: Request, res: Response, next: NextFunction) {
-    OK({
-      res,
-      message: 'Login Success!',
-      metadata: await AuthService.signIn({
-        ...req.body,
-        refreshToken: req.headers[HEADER.REFRESH_TOKEN],
-      }),
-      link: {
-        signOut: { href: '/api/v1/signout', method: 'POST' },
-        createProduct: { href: '/api/v1/products', method: 'POST' },
-      },
-    });
-  }
-
-  static async signOut(req: Request, res: Response, next: NextFunction) {
-    OK({
-      res,
-      message: 'Logout Success!',
-      metadata: await AuthService.signOut(req.keyToken._id as string),
-      link: {
-        signUp: { href: '/api/v1/signup', method: 'POST' },
-        signIn: { href: '/api/v1/signin', method: 'POST' },
-      },
-    });
-  }
-
-  static async verifyEmailToken(req: Request, res: Response) {
+export default class CheckController {
+  static async checkStatus(req: Request, res: Response) {
     try {
-      await AuthService.verifyEmailToken({
-        token: req.query.token as string,
-      });
+      await mongoose.connection?.db
+        ?.admin()
+        .ping()
+        .then((res) => {
+          if (!(res?.ok === 1)) throw new Error('MongoDB connect failed!');
+        });
 
       res.status(200).send(`<body style='margin:0'>
         <div style='background-color: #f3f4f6; height: 100vh; display: flex; align-items: center; justify-content: center;'>
@@ -64,10 +27,10 @@ export class AuthController {
             </div>
             <div style='text-align: center;'>
               <h3 style='font-size: 1.25rem; font-weight: 600; color: #1f2937; margin: 0;'>
-                Email Verify Successfully!
+                Server is Healthy!
               </h3>
               <p style='color: #4b5563; margin: 0.5rem 0;'>
-                Thank you for completing your secure online signup.
+                Thank you for using our service. Let's goo!
               </p>
               <p style='margin: 0.5rem 0;'>Have a great day!</p>
               <div style='padding-top: 2.5rem; text-align: center;'>
@@ -101,7 +64,7 @@ export class AuthController {
             </div>
             <div style='text-align: center;'>
               <h3 style='font-size: 1.25rem; font-weight: 600; color: #1f2937; margin: 0;'>
-                Email Verify Failed!
+                Server is not Healthy!
               </h3>
               <p style='color: #4b5563; margin: 0.5rem 0;'>
                 ${e.message}
@@ -123,16 +86,5 @@ export class AuthController {
       </body>`);
       return;
     }
-  }
-
-  static async refreshToken(req: Request, res: Response, next: NextFunction) {
-    return OK({
-      res,
-      message: 'Refresh tokens Success!',
-      metadata: await AuthService.refreshTokenHandler(req),
-      link: {
-        signOut: { href: '/api/v1/signout', method: 'POST' },
-      },
-    });
   }
 }

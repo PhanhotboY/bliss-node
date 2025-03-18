@@ -36,7 +36,7 @@
       "@services/*": ["./src/api/services/*"],
       "@models/*": ["./src/api/models/*"],
       "@types/*": ["./src/api/types/*"],
-      "@config/*": ["./src/config/*"],
+      "@configs/*": ["./src/configs/*"],
       "@routes/*": ["./src/api/routes/*"],
       "@controllers/*": ["./src/api/controllers/*"]
     } /* Specify a set of entries that re-map imports to additional lookup locations. */,

@@ -1,16 +1,17 @@
 import { Schema, Types, model } from 'mongoose';
 import { IBooking, IBookingModel } from '../interfaces/booking.interface';
 import { formatAttributeName } from '../utils';
-import { BOOKING } from '../constants';
+import { BOOKING, BRANCH } from '../constants';
 
 const bookingSchema = new Schema<IBooking, IBookingModel>(
   {
     bok_name: { type: String, required: true },
     bok_msisdn: { type: String, required: true },
-    bok_date2Call: { type: String, required: true },
-    bok_email: { type: String },
-    bok_time2Call: { type: String },
-    bok_message: { type: String },
+    bok_branch: {
+      type: Types.ObjectId,
+      ref: BRANCH.DOCUMENT_NAME,
+      required: true,
+    },
     bok_viewed: { type: Boolean, default: false },
   },
   {

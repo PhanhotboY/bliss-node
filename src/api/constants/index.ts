@@ -2,22 +2,21 @@ export * from './app.constant';
 export * from './template.constant';
 export * from './user.constant';
 export * from './otp.constant';
-export * from './post.constant';
+export * from './page.constant';
 export * from './booking.constant';
-export * from './product.constant';
 export * from './category.constant';
-export * from './order.constant';
+export * from './image.constant';
+export * from './branch.constant';
 export * from './slider.constant';
-export * from './service.constant';
 
 export const KEYTOKEN = {
-  COLLECTION_NAME: 'KeyTokens',
   DOCUMENT_NAME: 'KeyToken',
+  COLLECTION_NAME: 'key_tokens',
 };
 
 export const APIKEY = {
-  COLLECTION_NAME: 'ApiKeys',
   DOCUMENT_NAME: 'ApiKey',
+  COLLECTION_NAME: 'apikeys',
 };
 
 export const HEADER = {

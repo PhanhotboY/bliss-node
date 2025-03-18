@@ -1,9 +1,9 @@
 import { Schema, Types, model } from 'mongoose';
-import { IPost, IPostModel } from '../interfaces/post.interface';
+import { IPage, IPageModel } from '../interfaces/page.interface';
 import { formatAttributeName } from '../utils';
-import { POST } from '../constants';
+import { PAGE } from '../constants';
 
-const postSchema = new Schema<IPost, IPostModel>(
+const pageSchema = new Schema<IPage, IPageModel>(
   {
     pst_title: {
       type: String,
@@ -30,12 +30,10 @@ const postSchema = new Schema<IPost, IPostModel>(
       required: true,
     },
     pst_category: {
-      type: Types.ObjectId,
-      ref: POST.CATEGORY.DOCUMENT_NAME,
+      type: String,
     },
     pst_template: {
-      type: Types.ObjectId,
-      ref: POST.TEMPLATE.DOCUMENT_NAME,
+      type: String,
       required: true,
     },
     pst_views: {
@@ -51,15 +49,15 @@ const postSchema = new Schema<IPost, IPostModel>(
   },
   {
     timestamps: true,
-    collection: POST.COLLECTION_NAME,
+    collection: PAGE.COLLECTION_NAME,
   }
 );
 
-postSchema.statics.build = (attrs: IPost) => {
-  return PostModel.create(formatAttributeName(attrs, POST.PREFIX));
+pageSchema.statics.build = (attrs: IPage) => {
+  return PageModel.create(formatAttributeName(attrs, PAGE.PREFIX));
 };
 
-export const PostModel = model<IPost, IPostModel>(
-  POST.DOCUMENT_NAME,
-  postSchema
+export const PageModel = model<IPage, IPageModel>(
+  PAGE.DOCUMENT_NAME,
+  pageSchema
 );

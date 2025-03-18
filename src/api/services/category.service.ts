@@ -49,7 +49,6 @@ const createCategory = async (category: ICategoryAttrs) => {
 };
 
 const updateCategory = async (id: string, category: ICategoryAttrs) => {
-  console.log(category);
   const updatedCategory = await CategoryModel.findByIdAndUpdate(
     id,
     {
