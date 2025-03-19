@@ -51,6 +51,8 @@ function getReturnData<T = Object>(
     if (filteredObj[key]?._id) {
       filteredObj[key] = getReturnData(filteredObj[key]) as any;
     }
+    if (Array.isArray(filteredObj[key]))
+      filteredObj[key] = getReturnList(filteredObj[key]) as any;
   }
 
   return filteredObj;
