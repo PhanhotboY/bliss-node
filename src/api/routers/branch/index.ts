@@ -5,6 +5,7 @@ import { Router } from 'express';
 const router = Router();
 
 router.get('/', BranchController.getBranches);
+router.get('/main', BranchController.getMainBranch);
 router.get('/:id', BranchController.getBranchDetails);
 
 router.use(authenticationV2);

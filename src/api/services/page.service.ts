@@ -14,10 +14,6 @@ import { PAGE } from '../constants';
 import { getExcerpt } from '@utils/page.util';
 
 const createPage = async (page: IPageAttrs) => {
-  if (!page.category) {
-    page.category = PAGE.CATEGORY.OPTIONS.NONE.slug;
-  }
-
   const newPage = await PageModel.build({
     ...page,
     excerpt: page.excerpt || getExcerpt(page.content),

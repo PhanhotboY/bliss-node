@@ -20,6 +20,14 @@ export class BranchController {
     });
   }
 
+  static async getMainBranch(req: Request, res: Response) {
+    return OK({
+      res,
+      message: 'App settings fetched successfully',
+      metadata: await branchService.getMainBranch(),
+    });
+  }
+
   static async updateBranch(req: Request, res: Response) {
     return OK({
       res,

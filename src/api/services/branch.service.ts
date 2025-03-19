@@ -11,15 +11,26 @@ import { IBranchAttrs } from '../interfaces/branch.interface';
 
 const getBranches = async () => {
   const branches = await BranchModel.find({}, { __v: 0 }).populate(
-    'bra_logo',
+    'bra_thumbnail',
     '-__v'
   );
   return getReturnList(branches);
 };
 
+const getMainBranch = async () => {
+  const branch = await BranchModel.findOne(
+    { bra_isMain: true },
+    { __v: 0 }
+  ).populate('bra_thumbnail', '-__v');
+  if (!branch) {
+    throw new NotFoundError('Main branch not found');
+  }
+  return getReturnData(branch);
+};
+
 const getBranchDetails = async (branchId: string) => {
   const branch = await BranchModel.findById(branchId, { __v: 0 }).populate(
-    'bra_logo',
+    'bra_thumbnail',
     '-__v'
   );
   if (!branch) {
@@ -35,7 +46,7 @@ const createBranch = async (branch: IBranchAttrs) => {
 
   const newBranch = await BranchModel.build(branch);
 
-  return getReturnData(await newBranch.populate('bra_logo', '-__v'));
+  return getReturnData(await newBranch.populate('bra_thumbnail', '-__v'));
 };
 
 const updateBranch = async (branchId: string, branch: IBranchAttrs) => {
@@ -47,7 +58,7 @@ const updateBranch = async (branchId: string, branch: IBranchAttrs) => {
     branchId,
     formatAttributeName(removeNestedNullish(branch), BRANCH.PREFIX),
     { new: true }
-  ).populate('bra_logo', '-__v');
+  ).populate('bra_thumbnail', '-__v');
   if (!updatedBranch) {
     throw new NotFoundError('Branch not found');
   }
@@ -67,5 +78,6 @@ export {
   createBranch,
   updateBranch,
   deleteBranch,
+  getMainBranch,
   getBranchDetails,
 };
