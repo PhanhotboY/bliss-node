@@ -8,16 +8,7 @@ const UPLOAD_SIZE_LIMIT = 5 * 1024 * 1024;
 
 const diskStorage = multer({
   storage: multer.diskStorage({
-    destination: (req, file, cb) => {
-      try {
-        if (!fs.existsSync(UPLOAD_FOLDER)) {
-          fs.mkdirSync(UPLOAD_FOLDER);
-        }
-        cb(null, UPLOAD_FOLDER);
-      } catch (error) {
-        console.error(error);
-      }
-    },
+    destination: UPLOAD_FOLDER,
     filename: (req, file, cb) => {
       const decodedFilename = Buffer.from(file.originalname, 'latin1').toString(
         'utf8'
