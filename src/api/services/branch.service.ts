@@ -22,9 +22,7 @@ const getMainBranch = async () => {
     { bra_isMain: true },
     { __v: 0 }
   ).populate('bra_thumbnail', '-__v');
-  if (!branch) {
-    throw new NotFoundError('Main branch not found');
-  }
+
   return getReturnData(branch);
 };
 
