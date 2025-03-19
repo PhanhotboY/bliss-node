@@ -53,7 +53,7 @@ app.use(morgan('dev'));
 // Serve static files with CORS
 app.use(
   '/uploads',
-  express.static(path.join(__dirname, '../public/uploads'), {
+  express.static('public/uploads', {
     setHeaders: (res, path) => {
       res.setHeader('Content-Disposition', 'attachment');
       res.setHeader('Cache-Control', 'public, max-age=31536000');
