@@ -2,16 +2,19 @@ const env = process.env;
 
 interface IServerConfig {
   serverUrl: string;
+  imageHost: string;
   clientUrl: string;
 }
 
 const serverConfigEnv: Record<string, IServerConfig> = {
   development: {
     serverUrl: env.DEV_SERVER_URL as string,
+    imageHost: env.DEV_IMAGE_HOST as string,
     clientUrl: env.DEV_CLIENT_URL as string,
   },
   production: {
     serverUrl: env.PRO_SERVER_URL as string,
+    imageHost: env.PRO_IMAGE_HOST as string,
     clientUrl: env.PRO_CLIENT_URL as string,
   },
 };

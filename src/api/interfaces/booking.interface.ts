@@ -5,10 +5,9 @@ export interface IRawBooking {
   bok_name: string;
   bok_msisdn: string;
   bok_email: string;
-  bok_time2Call: string;
-  bok_date2Call: string;
   bok_message: string;
   bok_viewed: boolean;
+  bok_branch: ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -17,10 +16,9 @@ export interface IBookingAttrs {
   name: string;
   msisdn: string;
   email?: string;
-  time2Call: string;
-  date2Call: string;
   message: string;
   viewed: boolean;
+  branch: string;
 }
 
 export type IBooking = HydratedDocument<IRawBooking>;

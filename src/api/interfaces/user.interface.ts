@@ -1,4 +1,4 @@
-import { HydratedDocument, Model, Types } from 'mongoose';
+import { HydratedDocument, Model, ObjectId, Types } from 'mongoose';
 import { USER } from '../constants';
 
 export interface IRawUser {
@@ -12,7 +12,7 @@ export interface IRawUser {
   usr_salt: string;
   usr_msisdn: string;
   usr_sex: string;
-  usr_avatar: string;
+  usr_avatar: ObjectId;
   usr_birthdate: Date;
   usr_address: string;
   usr_status: Values<typeof USER.STATUS>;

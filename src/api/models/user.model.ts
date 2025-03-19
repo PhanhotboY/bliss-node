@@ -1,6 +1,6 @@
-import { model, Schema } from 'mongoose';
+import { model, Schema, Types } from 'mongoose';
 
-import { USER } from '../constants';
+import { IMAGE, USER } from '../constants';
 import { IUserAttrs, IUser, IUserModel } from '../interfaces/user.interface';
 import { formatAttributeName } from '../utils';
 
@@ -33,7 +33,7 @@ const userSchema = new Schema<IUser, IUserModel>(
     usr_slug: { type: String, required: true },
     usr_password: { type: String, required: true },
     usr_salt: { type: String, require: true },
-    usr_avatar: { type: String, default: '' },
+    usr_avatar: { type: Types.ObjectId, ref: IMAGE.DOCUMENT_NAME },
     usr_birthdate: { type: Date, default: null },
     usr_msisdn: { type: String, default: '' },
     usr_sex: { type: String, default: '' },

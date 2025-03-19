@@ -1,6 +1,7 @@
 import { ImageModel } from '@models/image.model';
 import {
   formatAttributeName,
+  getImageUrl,
   getReturnData,
   getReturnList,
   removeNestedNullish,
@@ -9,14 +10,20 @@ import { BadRequestError, NotFoundError } from '../core/errors';
 import { IImageAttrs } from '../interfaces/image.interface';
 import { IMAGE } from '../constants';
 import { unlink } from 'fs/promises';
+import { isValidObjectId } from 'mongoose';
 
 const getImages = async () => {
   const images = await ImageModel.find({}, ['-__v -img_description']).lean();
+
   return getReturnList(images);
 };
 
 const getImage = async (id: string) => {
-  const image = await ImageModel.findById(id, ['-__v']).lean();
+  const image = await ImageModel.findOne(
+    { $or: [{ _id: isValidObjectId(id) ? id : null }, { img_name: id }] },
+    ['-__v']
+  ).lean();
+
   if (!image) throw new NotFoundError('Image not found');
 
   return getReturnData(image);
@@ -29,6 +36,7 @@ const createImage = async (files?: Express.Multer.File[]) => {
   for (const file of files) {
     const image = await ImageModel.build({
       name: file.filename,
+      url: getImageUrl(file.filename),
       title: file.filename.split('.')[0],
     });
     newImage.push(image);
@@ -38,7 +46,7 @@ const createImage = async (files?: Express.Multer.File[]) => {
 
 const updateImage = async (id: string, image: IImageAttrs) => {
   let updatedImage = await ImageModel.findOneAndUpdate(
-    { _id: id },
+    { $or: [{ _id: isValidObjectId(id) ? id : null }, { img_name: id }] },
     {
       ...formatAttributeName(removeNestedNullish(image), IMAGE.PREFIX),
     },
@@ -46,11 +54,13 @@ const updateImage = async (id: string, image: IImageAttrs) => {
   );
   // If image not found
   if (!updatedImage) throw new NotFoundError('Image not found');
-  return getReturnData(updatedImage!);
+  return getReturnData(updatedImage);
 };
 
 const deleteImage = async (id: string) => {
-  const deletedImage = await ImageModel.findOneAndDelete({ _id: id });
+  const deletedImage = await ImageModel.findOneAndDelete({
+    $or: [{ _id: isValidObjectId(id) ? id : null }, { img_name: id }],
+  });
   // If image not found
   if (!deletedImage) throw new NotFoundError('Image not found');
 

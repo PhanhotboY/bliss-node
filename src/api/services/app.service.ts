@@ -14,22 +14,21 @@ const updateAppSettings = async (settings: IAppAttrs) => {
     const app = await AppModel.build(settings);
     return getReturnData(app);
   }
-  app = await app.updateOne(
-    formatAttributeName(removeNestedNullish(settings), APP.PREFIX),
-    { new: true },
-  );
+  app = await app
+    .updateOne(formatAttributeName(removeNestedNullish(settings), APP.PREFIX), {
+      new: true,
+    })
+    .populate('app_logo', '-__v');
 
   return getReturnData(app!);
 };
 
 const getAppSettings = async () => {
-  const app = await AppModel.findOne({});
+  const app = await AppModel.findOne({}).populate('app_logo', '-__v');
   if (!app) {
     const app = await AppModel.build({
       title: '',
       description: '',
-      logo: '',
-      favicon: '',
       social: {
         facebook: '',
         zalo: '',
@@ -40,7 +39,8 @@ const getAppSettings = async () => {
       headScripts: '',
       bodyScripts: '',
     });
-    return getReturnData(app);
+    const populatedApp = await app.populate('app_logo', '-__v');
+    return getReturnData(populatedApp);
   }
 
   return getReturnData(app);

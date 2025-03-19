@@ -1,6 +1,6 @@
 import { randomBytes } from 'crypto';
 import { Request } from 'express';
-import _ from 'lodash';
+import _, { filter } from 'lodash';
 import slugify from 'slugify';
 import { serverConfig } from '@configs/config.server';
 
@@ -35,17 +35,25 @@ function getReturnData<T = Object>(
   if (obj.toObject) obj = obj.toObject();
 
   if (obj?._id) {
-    obj.id = obj._id;
+    obj.id = obj._id.toString();
 
     delete obj._id;
   }
 
-  const picked = _.isEmpty(options?.fields || [])
+  const pickedObj = _.isEmpty(options?.fields || [])
     ? obj
     : _.pick(obj, options?.fields!);
-  return omit(picked, [...(options?.without || []), '__v']) as Partial<
-    typeof obj
-  >;
+  const filteredObj = omit(pickedObj, [
+    ...(options?.without || []),
+    '__v',
+  ]) as Partial<typeof obj>;
+  for (const key in filteredObj) {
+    if (filteredObj[key]?._id) {
+      filteredObj[key] = getReturnData(filteredObj[key]) as any;
+    }
+  }
+
+  return filteredObj;
 }
 
 function getReturnList<T = Array<any>>(
@@ -155,11 +163,8 @@ function replaceTemplatePlaceholders(
   );
 }
 
-function getImageUrl(req: Request, attribute: string): string {
-  const path = (req.files as any)?.[attribute]?.[0].path;
-  if (!path) return req.body[attribute];
-
-  return serverConfig.serverUrl + path.replace('public', '');
+function getImageUrl(name: string): string {
+  return `${serverConfig.imageHost}/${name}`;
 }
 
 export {

@@ -24,6 +24,7 @@ async function main() {
   console.log('Metadata generated successfully!');
 
   await mongodbInstance.disconnect();
+  process.exit(0);
 }
 
 main();

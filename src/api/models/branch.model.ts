@@ -1,14 +1,18 @@
 import { Schema, Types, model } from 'mongoose';
 import { IBranch, IBranchModel } from '../interfaces/branch.interface';
 import { formatAttributeName } from '../utils';
-import { BRANCH } from '../constants';
+import { BRANCH, IMAGE } from '../constants';
 
 const branchSchema = new Schema<IBranch, IBranchModel>(
   {
     bra_name: { type: String, required: true },
     bra_email: { type: String, required: true },
     bra_msisdn: { type: String, required: true },
-    bra_thumbnail: { type: String, required: true },
+    bra_thumbnail: {
+      type: Types.ObjectId,
+      ref: IMAGE.DOCUMENT_NAME,
+      required: true,
+    },
     bra_address: {
       province: { type: String, required: true },
       district: { type: String, required: true },
@@ -20,7 +24,7 @@ const branchSchema = new Schema<IBranch, IBranchModel>(
   {
     timestamps: true,
     collection: BRANCH.COLLECTION_NAME,
-  },
+  }
 );
 
 branchSchema.statics.build = (attrs: IBranch) => {
@@ -29,5 +33,5 @@ branchSchema.statics.build = (attrs: IBranch) => {
 
 export const BranchModel = model<IBranch, IBranchModel>(
   BRANCH.DOCUMENT_NAME,
-  branchSchema,
+  branchSchema
 );

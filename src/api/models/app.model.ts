@@ -1,14 +1,13 @@
 import { Schema, Types, model } from 'mongoose';
 import { IApp, IAppModel } from '../interfaces/app.interface';
 import { formatAttributeName } from '../utils';
-import { APP } from '../constants';
+import { APP, IMAGE } from '../constants';
 
 const appSchema = new Schema<IApp, IAppModel>(
   {
     app_title: { type: String },
     app_description: { type: String },
-    app_logo: { type: String },
-    app_favicon: { type: String },
+    app_logo: { type: Types.ObjectId, ref: IMAGE.DOCUMENT_NAME },
     app_social: {
       facebook: { type: String },
       youtube: { type: String },
@@ -22,7 +21,7 @@ const appSchema = new Schema<IApp, IAppModel>(
   {
     timestamps: true,
     collection: APP.COLLECTION_NAME,
-  },
+  }
 );
 
 appSchema.statics.build = (attrs: IApp) => {

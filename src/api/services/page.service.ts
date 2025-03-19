@@ -5,7 +5,7 @@ import {
   getReturnList,
   removeNestedNullish,
 } from '@utils/index';
-import { isValidObjectId } from 'mongoose';
+import { isValidObjectId, ObjectId } from 'mongoose';
 
 import { IPageAttrs } from '../interfaces/page.interface';
 import { PageModel } from '../models/page.model';
@@ -24,7 +24,7 @@ const createPage = async (page: IPageAttrs) => {
     slug: page.title && slugify(page.title, { lower: true }),
     views: 0,
   });
-  return getReturnData(newPage);
+  return getReturnData(await newPage.populate('pst_thumbnail', '-__v'));
 };
 
 const getPublishedPages = async ({
@@ -46,7 +46,7 @@ const getPublishedPages = async ({
       pst_isPublished: true,
     },
     ['-pst_content']
-  );
+  ).populate('pst_thumbnail', '-__v');
   return getReturnList(pages);
 };
 
@@ -54,12 +54,14 @@ const getAllPages = async (query: any) => {
   const pages = await PageModel.find(
     { ...formatAttributeName(removeNestedNullish(query), PAGE.PREFIX) },
     ['-pst_content']
-  );
+  ).populate('pst_thumbnail', '-__v');
   return getReturnList(pages);
 };
 
 const getUnpublishedPages = async () => {
-  const pages = await PageModel.find({ pst_isPublished: false });
+  const pages = await PageModel.find({ pst_isPublished: false }).populate(
+    'pst_thumbnail'
+  );
   return getReturnList(pages);
 };
 
@@ -67,10 +69,13 @@ const getPostDetail = async (id: string) => {
   let page;
   if (isValidObjectId(id)) {
     // if the given value is a valid ObjectId
-    page = await PageModel.findById(id);
+    page = await PageModel.findById(id).populate('pst_thumbnail', '-__v');
   } else {
     // else, search by slug
-    page = await PageModel.findOne({ pst_slug: id });
+    page = await PageModel.findOne({ pst_slug: id }).populate(
+      'pst_thumbnail',
+      '-__v'
+    );
   }
 
   if (!page) {
@@ -94,7 +99,7 @@ const updatePage = async (id: string, page: IPageAttrs) => {
     {
       new: true,
     }
-  );
+  ).populate('pst_thumbnail', '-__v');
   if (!updatedPage) {
     throw new NotFoundError('Page not found');
   }

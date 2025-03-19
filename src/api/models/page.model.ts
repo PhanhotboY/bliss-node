@@ -1,7 +1,7 @@
 import { Schema, Types, model } from 'mongoose';
 import { IPage, IPageModel } from '../interfaces/page.interface';
 import { formatAttributeName } from '../utils';
-import { PAGE } from '../constants';
+import { IMAGE, PAGE } from '../constants';
 
 const pageSchema = new Schema<IPage, IPageModel>(
   {
@@ -20,8 +20,8 @@ const pageSchema = new Schema<IPage, IPageModel>(
       trim: true,
     },
     pst_thumbnail: {
-      type: String,
-      trim: true,
+      type: Types.ObjectId,
+      ref: IMAGE.DOCUMENT_NAME,
     },
     pst_slug: {
       type: String,

@@ -5,7 +5,7 @@ interface IRawPage {
   _id: string;
   pst_title: string;
   pst_content: string;
-  pst_thumbnail: string;
+  pst_thumbnail: ObjectId;
   pst_slug: string;
   pst_views: number;
   pst_excerpt: string;

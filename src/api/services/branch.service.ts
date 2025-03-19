@@ -10,12 +10,18 @@ import { BRANCH } from '../constants';
 import { IBranchAttrs } from '../interfaces/branch.interface';
 
 const getBranches = async () => {
-  const branches = await BranchModel.find({}, { __v: 0 });
+  const branches = await BranchModel.find({}, { __v: 0 }).populate(
+    'bra_logo',
+    '-__v'
+  );
   return getReturnList(branches);
 };
 
 const getBranchDetails = async (branchId: string) => {
-  const branch = await BranchModel.findById(branchId, { __v: 0 });
+  const branch = await BranchModel.findById(branchId, { __v: 0 }).populate(
+    'bra_logo',
+    '-__v'
+  );
   if (!branch) {
     throw new NotFoundError('Branch not found');
   }
@@ -29,7 +35,7 @@ const createBranch = async (branch: IBranchAttrs) => {
 
   const newBranch = await BranchModel.build(branch);
 
-  return getReturnData(newBranch);
+  return getReturnData(await newBranch.populate('bra_logo', '-__v'));
 };
 
 const updateBranch = async (branchId: string, branch: IBranchAttrs) => {
@@ -41,7 +47,7 @@ const updateBranch = async (branchId: string, branch: IBranchAttrs) => {
     branchId,
     formatAttributeName(removeNestedNullish(branch), BRANCH.PREFIX),
     { new: true }
-  );
+  ).populate('bra_logo', '-__v');
   if (!updatedBranch) {
     throw new NotFoundError('Branch not found');
   }

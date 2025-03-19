@@ -34,6 +34,8 @@ async function main() {
   console.log('Api keys generated successfully');
 
   await mongodbInstance.disconnect();
+
+  process.exit(0);
 }
 
 main();
