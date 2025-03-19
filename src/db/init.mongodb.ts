@@ -35,9 +35,9 @@ class MongoDB {
     const env = process.env.NODE_ENV as 'development' | 'production';
 
     const connectionStr = {
-      production: `mongodb+srv://${dbUser}:${dbPwd}@${dbHost}?retryWrites=true&w=majority&appName=Cluster0`,
+      // production: `mongodb+srv://${dbUser}:${dbPwd}@${dbHost}?retryWrites=true&w=majority&appName=Cluster0`,
       development: `mongodb+srv://${dbUser}:${dbPwd}@${dbHost}?retryWrites=true&w=majority&appName=Cluster0`,
-      // production: `mongodb://${dbUser}:${dbPwd}@${dbHost}:${dbPort}`,
+      production: `mongodb://${dbUser}:${dbPwd}@${dbHost}:${dbPort}`,
       // development: `mongodb://${dbUser}:${dbPwd}@${dbHost}:${dbPort}`,
     }[env];
 
