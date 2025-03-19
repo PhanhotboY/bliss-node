@@ -24,7 +24,7 @@ export class BranchController {
     return OK({
       res,
       message: 'App settings fetched successfully',
-      metadata: await branchService.getMainBranch(),
+      metadata: (await branchService.getMainBranch()) || undefined,
     });
   }
 
